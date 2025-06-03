@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencias empaquetadas
+dist/
+build/
+
+# Archivos de entorno (por si usas .env)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# SQLite base de datos local
+*.sqlite
+*.sqlite3
+database.sqlite
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# IDE / Editor (ajusta según el que uses)
+.vscode/
+.idea/
+*.iml
+
+# Webpack cache
+.cache/
+
+# React / Vite cache
+.vite/
+
+# Coverage reports
+coverage/
+
+# Otros
+*.bak
+*.tmp
