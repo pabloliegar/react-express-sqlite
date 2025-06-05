@@ -1,17 +1,17 @@
-const WebSocket = require('ws');
+// websocket.js
+import {WebSocketServer } from 'ws';
 
-module.exports = function (server) {
-  const wss = new WebSocket.Server({ server });
+export default function (server) {
+  const wss = new WebSocketServer ({ server });
 
   wss.on('connection', (ws) => {
     console.log('Cliente WS conectado');
 
     ws.on('message', (msg) => {
-      console.log('Mensaje recibido:', msg);
+      console.log('Mensaje recibido:', msg)
 
-      // Echo a todos los clientes conectados (menos al que envió)
       wss.clients.forEach(client => {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
+        if (client !== ws && client.readyState === wss.OPEN) {
           client.send(`Echo desde servidor: ${msg}`);
         }
       });
@@ -21,4 +21,4 @@ module.exports = function (server) {
       console.log('Cliente WS desconectado');
     });
   });
-};
+}

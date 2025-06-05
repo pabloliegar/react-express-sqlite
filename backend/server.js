@@ -1,17 +1,15 @@
-const express = require('express');
-const http = require('http');
-const app = express();
-const server = http.createServer(app);
-const WebSocketServer = require('./websocket');
-
+import express from 'express'
+import http from 'http'
+import { usersRouter } from './routes/routes.js'
+import WebSocketServer from './websocket.js' // asegúrate de que este archivo también use export default
+const app = express()
 app.use(express.json());
-
+const server = http.createServer(app)
 // Importar rutas
 
-const usersRouter = require('./routes/users');
 
 
-app.use('/api/users', usersRouter);
+app.use('/api/usuarios', usersRouter);
 
 // Inicializar WebSocket con el servidor HTTP
 WebSocketServer(server);
