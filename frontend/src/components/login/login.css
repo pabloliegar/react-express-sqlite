@@ -1,0 +1,60 @@
+/* El contenedor padre (body o div principal) debe tener altura completa */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* Contenedor para centrar el formulario */
+.formulario {
+  display: flex;
+  flex-direction: column;   /* los inputs en columna */
+  gap: 1rem;                /* espacio entre ellos */
+  width: 300px;
+  padding: 2rem;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+
+  /* Centramos el formulario vertical y horizontalmente */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Inputs blancos y estilo */
+.formulario input {
+  color: black;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Botón */
+.formulario button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.registro-link {
+  display: block;       /* para estar en línea separada */
+  margin: 0 0 1rem 0;   /* margen abajo para separar del botón */
+  font-weight: normal;
+  color: #007bff;       /* azul típico link */
+  cursor: pointer;
+  user-select: none;
+  text-align: left;     /* alineado a la izquierda */
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.formulario button:hover {
+  background-color: #45a049;
+}

@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 
+import {Navigation} from "./routes/navigation"
+import {AuthProvider} from "./context/AuthContext"
 function App() {
  
-  const [users, setUsers] = useState([]);
+ /* const [users, setUsers] = useState([]);
   
   const [inputUser, setInputUser] = useState({ username: '', email: '',contrasena:'',avatar:'' });
   const ws = useRef(null);
@@ -44,43 +46,16 @@ function App() {
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({nombre: username.trim(), email: email.trim(),contrasena: contrasena.trim(),avatar:avatar.trim()})
     }).then(r => r.json()).then(() => setInputUser({ username: '', email: '',contrasena:'',avatar:'' }));
-  };
+  };*/
 
   return (
-    <div>
-      <h1>React + Express + SQLite + WebSocket con varias tablas</h1>
-
-     
-
-      <section>
-        <h2>Users</h2>
-        <ul>{users.map(u => <li key={u.id}>{u.username} ({u.email})</li>)}</ul>
-        <input 
-          placeholder="Username"
-          value={inputUser.username}
-          onChange={e => setInputUser({...inputUser, username: e.target.value})}
-        />
-        <input 
-          placeholder="Email"
-          value={inputUser.email}
-          onChange={e => setInputUser({...inputUser, email: e.target.value})}
-        />
-        
-        <input 
-          placeholder="Contraseña"
-          value={inputUser.contrasena}
-          onChange={e => setInputUser({...inputUser, contrasena: e.target.value})}
-        />
-        
-        <input 
-          placeholder="avatar"
-          value={inputUser.avatar}
-          onChange={e => setInputUser({...inputUser, avatar: e.target.value})}
-        />
-        
-        <button onClick={addUser}>Agregar User</button>
-      </section>
-    </div>
+   <>
+   <AuthProvider>
+    <Navigation/>
+      </AuthProvider>
+    
+    
+   </>
   );
 }
 
