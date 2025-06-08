@@ -18,5 +18,16 @@ export class usersController{
       res.status(500).json({ error: error.message });
     }
   }
+  static async usuario(req,res){
+    try {
+       const user = await usersModel.usuario(req.body);
+       if (!user) {
+      return res.status(401).json({ message: 'Email o contraseña incorrectos' });
+    }
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
 }
