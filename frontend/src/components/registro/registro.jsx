@@ -1,6 +1,6 @@
 import React ,{useState}from "react";
 import "./registro.css"
-import {useUser} from "../../hooks/useUser"
+import {useUser} from "@/hooks/useUser"
 import {Link} from "react-router-dom"
 export function Registro(){
     const {userCreate}=useUser()

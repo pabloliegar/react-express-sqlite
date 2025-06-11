@@ -1,8 +1,9 @@
-import {createUser} from "../api/users"
+import {createUser,getMeApi} from "../api/users"
 
 export function useUser(){
-    const getMe=async()=>{
-        const response= null
+    const getMe=async(token)=>{
+        
+        const response=  await getMeApi(token)
         return response
     }
      const userCreate=async(data)=>{

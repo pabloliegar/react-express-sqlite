@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 export async function loginUser(credentials) {
   try {
-    const response = await fetch('/api/usuario', {
+    const response = await fetch('http://localhost:4000/api/usuarios/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,4 +42,23 @@ export async function createUser({ nombre, email, contrasena, avatar }) {
   } catch (error) {
     throw error;
   }
+}
+export async function getMeApi(token){
+    try {
+     
+        const url =`http://localhost:4000/api/usuarios/`
+        const params ={
+          method: 'GET',
+            headers:{
+               'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const response = await fetch(url,params);
+        const result = await response.json()
+        return result
+     } catch (error) {
+       throw error 
+       
+    }
 }

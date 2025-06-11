@@ -11,9 +11,16 @@ const config={
 }
 const connection= await mysql.createConnection(config)
 export class usersModel{
-    static async getAll(){
-        const [rows] = await connection.execute('SELECT * FROM usuarios')
-        return rows
+    static async getAll(token){
+          const decoded = jwt.verify(token, SECRET_KEY);
+          console.log(decoded)
+      const userId = decoded.id;
+
+      // Aquí podrías hacer consultas filtrando por userId u otra lógica
+      // Por ejemplo: devolver solo el usuario con ese id o info relacionada
+      const [rows] = await connection.execute('SELECT * FROM usuarios WHERE id = ?', [userId]);
+      
+      return rows;
     }
     static async create({ nombre, email, contrasena, avatar }) {
       const saltRounds = 10;

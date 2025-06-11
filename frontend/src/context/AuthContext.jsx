@@ -12,24 +12,33 @@ export const AuthContext = createContext({
 export function AuthProvider(props){
     const {children} =props;
     const [auth ,setAuth] = useState(undefined)
-    const {getME} = useUser()
+    const {getMe} = useUser()
 
     useEffect( ()=>{
        (async ()=>{
         const token = getToken();
         if(token){
-           const me = await getME(token)
+           const me = await getMe(token)
+           
            setAuth({token,me})
+           
         }else{
             setAuth(null)
         }
-       })(); 
+        
+       })();
+        
        // eslint-disable-next-line
     }, []);
+    useEffect(() => {
+  console.log('Auth actualizado:', auth);
+}, [auth]);
     const login = async (token) => {
         setToken(token)
-        const me = await getME(token)
+        console.log(token)
+        const me = await getMe(token)
         setAuth({token, me})
+        console.log(me)
     };
 
     const logout = () => {

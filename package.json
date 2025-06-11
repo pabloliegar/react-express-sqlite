@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "dev": "concurrently \"npm run dev-client\" \"npm run dev-server\"",
+    "dev-client": "cd frontend && npm run dev",
+    "dev-server": "cd backend && node --watch server.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10"
+  }
 }
