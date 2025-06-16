@@ -3,7 +3,7 @@ import "./principal.css";
 import { Login } from "../login/login";
 import {Modal} from "@/modal/modal";
 import {getToken } from "@/api/token";
-
+import {Chatg} from "@/components/chatg/chatg";
 export function Principal() {
    const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -14,9 +14,10 @@ export function Principal() {
     }
   }, []);
 return (
+  <>
      <div className="principal">
-      <h1>Principal</h1>
-      <p>Bienvenido al sistema de gestión de usuarios.</p>
+     
+      <Chatg />
 
       {showLoginModal && (
         <Modal>
@@ -24,5 +25,6 @@ return (
         </Modal>
       )}
     </div>
+    </>
   );
 }

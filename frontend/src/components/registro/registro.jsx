@@ -28,7 +28,7 @@ export function Registro(){
                         <input type="txt" placeholder="nombre" name="nombre" value={form.nombre} onChange={handleChange} />
                         <input type="email" placeholder="correo electronico" name="email"  value={form.email} onChange={handleChange}/>
                         <input type="password" placeholder="contraseña"  name="contrasena"  value={form.contrasena} onChange={handleChange}/>
-                        <Link to="/" className="registro-link">
+                        <Link to="/login" className="registro-link">
                             volver al login
                         </Link>
                         <button >Regístrarse</button>

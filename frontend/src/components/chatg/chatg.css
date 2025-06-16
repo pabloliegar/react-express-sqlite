@@ -1,0 +1,21 @@
+.comments {
+  margin-top: 10px;
+  background-color: #262626;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.comment {
+  padding: 6px 0;
+  border-bottom: 1px solid #444;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.comment-user {
+  color: #00acee;
+  font-weight: bold;
+  margin-right: 5px;
+}
