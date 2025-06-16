@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./chatg.css";
 import { io } from "socket.io-client";
-
+import {useAuth} from "@/hooks/useAuth"
 const socket = io("http://localhost:4000");
 
 export function Chatg() {
+  const {auth} = useAuth();
   const [tweets, setTweets] = useState([]);
-  const [expandedTweetIndex, setExpandedTweetIndex] = useState(null);
+  const [newTweetText, setNewTweetText] = useState("");
 
   useEffect(() => {
     socket.on("newTweet", (tweet) => {
@@ -18,22 +19,54 @@ export function Chatg() {
     };
   }, []);
 
-  const toggleComments = (index) => {
-    setExpandedTweetIndex((prev) => (prev === index ? null : index));
+  const handleSendTweet = () => {
+    const text = newTweetText.trim();
+    if (text === "") return;
+
+    // Construir un tweet básico (puedes ajustar con más datos)
+    const tweetToSend = {
+      id: Date.now(),  // id temporal, el servidor debería asignar uno definitivo
+      username: auth?.me?.[0].nombre || "Usuario",
+      handle: auth?.me?.[0].email || "@usuario",
+      text,
+      comments: [],
+      retweets: 0,
+      likes: 0,
+      views: 0,
+    };
+
+    // Emitir el tweet al servidor
+    socket.emit("sendTweet", tweetToSend);
+
+    // Opcional: limpiar el input (la actualización llegará por socket)
+    setNewTweetText("");
   };
 
   return (
     <div className="feed">
+      <div className="new-tweet-form" style={{ marginBottom: "1rem" }}>
+        <textarea
+          rows={3}
+          placeholder="¿Qué está pasando?"
+          value={newTweetText}
+          onChange={(e) => setNewTweetText(e.target.value)}
+          style={{ width: "100%", resize: "vertical" }}
+        />
+        <button onClick={handleSendTweet} style={{ marginTop: "0.5rem" }}>
+          Twittear
+        </button>
+      </div>
+
       {tweets.map((tweet, index) => (
         <div
           className="tweet"
-          key={index}
-          onClick={() => toggleComments(index)}
-          style={{ cursor: "pointer" }}
+          key={tweet.id || index}
+          style={{ cursor: "default" }}
         >
           <div className="header">
+          
             <span className="username">{tweet.username}</span>
-            {tweet.handle && <span className="handle">{tweet.handle}</span>}
+            {tweet.handle && <span className="handle">-{tweet.handle}</span>}
           </div>
 
           {tweet.title && (
@@ -60,16 +93,6 @@ export function Chatg() {
             <span>❤️ {tweet.likes || 0}</span>
             <span>👁 {tweet.views || 0}</span>
           </div>
-
-          {expandedTweetIndex === index && tweet.comments && (
-            <div className="comments">
-              {tweet.comments.map((comment, i) => (
-                <div key={i} className="comment">
-                  <span className="comment-user">{comment.user}:</span> {comment.text}
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       ))}
     </div>
