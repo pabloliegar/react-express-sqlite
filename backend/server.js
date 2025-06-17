@@ -1,7 +1,7 @@
 import express from 'express'
 import http from 'http'
 import cors from 'cors';
-import { usersRouter } from './routes/routes.js'
+import { usersRouter,tweetsRouter } from './routes/routes.js'
 import WebSocketServer from './websocket.js' // asegúrate de que este archivo también use export default
 const app = express()
 app.use(express.json());
@@ -14,6 +14,7 @@ app.use(cors({
 }));
 
 app.use('/api/usuarios', usersRouter);
+app.use('/api/tweets', tweetsRouter);
 
 // Inicializar WebSocket con el servidor HTTP
 WebSocketServer(server);

@@ -18,7 +18,7 @@ export class usersModel{
 
       // Aquí podrías hacer consultas filtrando por userId u otra lógica
       // Por ejemplo: devolver solo el usuario con ese id o info relacionada
-      const [rows] = await connection.execute('SELECT * FROM usuarios WHERE id = ?', [userId]);
+      const [rows] = await connection.execute('SELECT id,nombre,email,avatar,fecha_registro FROM usuarios WHERE id = ?', [userId]);
       
       return rows;
     }

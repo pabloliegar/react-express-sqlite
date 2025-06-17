@@ -62,7 +62,7 @@ export function TweetDetail({ tweet, onBack, socket, currentUser }) {
         </div>
         {tweet.text && <div className="text">{tweet.text}</div>}
         <div className="icons">
-          <span>💬 {comments.length}</span>
+          <span>💬 {comments.length|| tweet.total_comentarios || 0}</span>
           <span>🔁 {tweet.retweets || 0}</span>
           <span>❤️ {tweet.likes || 0}</span>
           <span>👁 {tweet.views || 0}</span>

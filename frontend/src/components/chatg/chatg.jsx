@@ -3,10 +3,13 @@ import "./chatg.css";
 import { io } from "socket.io-client";
 import { useAuth } from "@/hooks/useAuth";
 import { TweetDetail } from "@/components/TweetDetail/TweetDetail";
+import {useTweets} from "@/hooks/useTweets"; 
+
 
 const socket = io("http://localhost:4000");
 
 export function Chatg() {
+  const { getTweets, createTweet } = useTweets();
   const { auth } = useAuth();
   const [tweets, setTweets] = useState([]);
   const [newTweetText, setNewTweetText] = useState("");
@@ -21,25 +24,54 @@ export function Chatg() {
       socket.off("newTweet");
     };
   }, []);
-
-  const handleSendTweet = () => {
-    const text = newTweetText.trim();
-    if (!text) return;
-
-    const tweetToSend = {
-      id: Date.now(),
-      username: auth?.me?.[0].nombre || "Usuario",
-      handle: auth?.me?.[0].email || "@usuario",
-      text,
+  useEffect(() => {
+  const fetchTweets = async () => {
+    const loadedTweets = await getTweets();
+    console.log("Tweets cargados:", loadedTweets);
+    const normalizedTweets = loadedTweets.map((t) => ({
+      ...t,
+      text: t.texto, // adaptar el campo
       retweets: 0,
       likes: 0,
       views: 0,
-      // no comments aquí
-    };
+       total_comentarios: t.total_comentarios || 0, // si viene del backend
+      username: t.nombre || "Usuario", // si viene del backend
+      handle: t.email || "",             // opcional
+    }));
 
-    socket.emit("sendTweet", tweetToSend);
-    setNewTweetText("");
+    setTweets(normalizedTweets);
   };
+
+  fetchTweets();
+}, []);
+
+  const handleSendTweet = async () => {
+  const text = newTweetText.trim();
+  if (!text || !auth?.me?.[0]?.id) return;
+
+  try {
+    const createdTweet = await createTweet({
+      userId: auth.me[0].id,
+      text,
+    });
+
+    // Ahora lo emites a todos los clientes por socket (incluido tú)
+    socket.emit("sendTweet", {
+      ...createdTweet,
+      username: auth.me[0].nombre,
+      handle: auth.me[0].email,
+      total_comentarios: 0, // Inicialmente 0, puedes actualizarlo después
+      retweets: 0,
+      likes: 0,
+      views: 0,
+    });
+
+    setNewTweetText("");
+  } catch (error) {
+    console.error("Error al crear el tweet:", error);
+  }
+};
+
 
   if (selectedTweet) {
     return (
@@ -82,7 +114,7 @@ export function Chatg() {
           {tweet.text && <div className="text">{tweet.text}</div>}
 
           <div className="icons">
-            <span>💬 0</span> {/* Comentarios no gestionados aquí */}
+            <span>💬 { tweet.total_comentarios}</span> {/* Comentarios no gestionados aquí */}
             <span>🔁 {tweet.retweets || 0}</span>
             <span>❤️ {tweet.likes || 0}</span>
             <span>👁 {tweet.views || 0}</span>
