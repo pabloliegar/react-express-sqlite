@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./chatg.css";
 import { io } from "socket.io-client";
-import {useAuth} from "@/hooks/useAuth"
+import { useAuth } from "@/hooks/useAuth";
+import { TweetDetail } from "@/components/TweetDetail/TweetDetail";
+
 const socket = io("http://localhost:4000");
 
 export function Chatg() {
-  const {auth} = useAuth();
+  const { auth } = useAuth();
   const [tweets, setTweets] = useState([]);
   const [newTweetText, setNewTweetText] = useState("");
+  const [selectedTweet, setSelectedTweet] = useState(null);
 
   useEffect(() => {
     socket.on("newTweet", (tweet) => {
@@ -21,26 +24,33 @@ export function Chatg() {
 
   const handleSendTweet = () => {
     const text = newTweetText.trim();
-    if (text === "") return;
+    if (!text) return;
 
-    // Construir un tweet básico (puedes ajustar con más datos)
     const tweetToSend = {
-      id: Date.now(),  // id temporal, el servidor debería asignar uno definitivo
+      id: Date.now(),
       username: auth?.me?.[0].nombre || "Usuario",
       handle: auth?.me?.[0].email || "@usuario",
       text,
-      comments: [],
       retweets: 0,
       likes: 0,
       views: 0,
+      // no comments aquí
     };
 
-    // Emitir el tweet al servidor
     socket.emit("sendTweet", tweetToSend);
-
-    // Opcional: limpiar el input (la actualización llegará por socket)
     setNewTweetText("");
   };
+
+  if (selectedTweet) {
+    return (
+      <TweetDetail
+        tweet={selectedTweet}
+        onBack={() => setSelectedTweet(null)}
+        socket={socket}
+        currentUser={auth?.me?.[0]}
+      />
+    );
+  }
 
   return (
     <div className="feed">
@@ -57,38 +67,22 @@ export function Chatg() {
         </button>
       </div>
 
-      {tweets.map((tweet, index) => (
+      {tweets.map((tweet) => (
         <div
+          key={tweet.id}
           className="tweet"
-          key={tweet.id || index}
-          style={{ cursor: "default" }}
+          style={{ cursor: "pointer" }}
+          onClick={() => setSelectedTweet(tweet)}
         >
           <div className="header">
-          
             <span className="username">{tweet.username}</span>
             {tweet.handle && <span className="handle">-{tweet.handle}</span>}
           </div>
 
-          {tweet.title && (
-            <div className="image-section">
-              <h3>{tweet.title}</h3>
-            </div>
-          )}
-
           {tweet.text && <div className="text">{tweet.text}</div>}
 
-          {tweet.quote && (
-            <div className="quote-tweet">
-              <div className="header">
-                <span className="username">{tweet.quote.username}</span>
-                <span className="handle">{tweet.quote.handle}</span>
-              </div>
-              <div className="text">{tweet.quote.text}</div>
-            </div>
-          )}
-
           <div className="icons">
-            <span>💬 {tweet.comments?.length || 0}</span>
+            <span>💬 0</span> {/* Comentarios no gestionados aquí */}
             <span>🔁 {tweet.retweets || 0}</span>
             <span>❤️ {tweet.likes || 0}</span>
             <span>👁 {tweet.views || 0}</span>

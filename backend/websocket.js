@@ -18,5 +18,8 @@ socket.on("sendTweet", (tweet) => {
     // Emitir a todos los clientes el nuevo tweet
     io.emit("newTweet", tweet);
   });
+ socket.on("addComment", ({ tweetId, comment }) => {
+  io.emit("updateComments", { tweetId, comment });
+});
 })
 }
