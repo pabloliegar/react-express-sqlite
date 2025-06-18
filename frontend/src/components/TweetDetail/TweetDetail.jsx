@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-
+import{ useComentarios } from "@/hooks/useComentarios";
 export function TweetDetail({ tweet, onBack, socket, currentUser }) {
   const [comments, setComments] = useState([]);
 
+  const { createcomentario} = useComentarios();
   useEffect(() => {
     setComments([]);
-
+console.log("Cargando comentarios para el tweet:", tweet);
     function onNewComment({ tweetId, comment }) {
       if (tweetId === tweet.id) {
        
@@ -15,11 +16,13 @@ export function TweetDetail({ tweet, onBack, socket, currentUser }) {
      
 
   socket.on("updateComments", ({ tweetId, comment }) => {
+    
   console.log("Recibido comentario:", comment);
   if (tweetId === tweet.id) {
     setComments((prev) => {
       if (prev.some(c => c.id === comment.id)) {
         console.log("Comentario duplicado ignorado:", comment.id);
+       
         return prev;
       }
       return [...prev, comment];
@@ -44,7 +47,8 @@ export function TweetDetail({ tweet, onBack, socket, currentUser }) {
       user: currentUser?.nombre || "Anon",
       text,
     };
-
+     createcomentario({ userId: currentUser?.id, text: newComment.text, tweetId: tweet.id })
+     tweet.total_comentarios = (tweet.total_comentarios || 0) + 1;
     socket.emit("addComment", { tweetId: tweet.id, comment: newComment });
     setCommentText("");
   };
@@ -62,7 +66,7 @@ export function TweetDetail({ tweet, onBack, socket, currentUser }) {
         </div>
         {tweet.text && <div className="text">{tweet.text}</div>}
         <div className="icons">
-          <span>💬 {comments.length|| tweet.total_comentarios || 0}</span>
+          <span>💬 { tweet.total_comentarios || 0}</span>
           <span>🔁 {tweet.retweets || 0}</span>
           <span>❤️ {tweet.likes || 0}</span>
           <span>👁 {tweet.views || 0}</span>

@@ -18,6 +18,7 @@ export function Chatg() {
   useEffect(() => {
     socket.on("newTweet", (tweet) => {
       setTweets((prevTweets) => [tweet, ...prevTweets]);
+      console.log("Nuevo tweet recibido:", tweet);
     });
 
     return () => {
