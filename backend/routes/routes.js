@@ -12,3 +12,4 @@ tweetsRouter.post('/', tweetsController.create);
 export const comentariosRouter = Router();
 comentariosRouter.get('/', comentariosController.getAll);
 comentariosRouter.post('/', comentariosController.create);
+comentariosRouter.get('/:tweetId', comentariosController.getByTweetId);

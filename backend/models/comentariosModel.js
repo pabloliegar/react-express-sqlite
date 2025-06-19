@@ -19,7 +19,7 @@ export class comentariosModel {
     }
 
     static async getByTweetId(tweetId) {
-        const [rows] = await connection.execute('SELECT comentarios.id, comentarios.texto, comentarios.usuario_id, comentarios.fecha, usuarios.nombre, usuarios.email, comentarios.tweet_id FROM comentarios JOIN usuarios ON usuarios.id=comentarios.usuario_id WHERE tweet_id = 1 ORDER BY comentarios.fecha DESC LIMIT 100 ?', [tweetId]);
+        const [rows] = await connection.execute('SELECT comentarios.id, comentarios.texto, comentarios.usuario_id, comentarios.fecha, usuarios.nombre, usuarios.email, comentarios.tweet_id FROM comentarios JOIN usuarios ON usuarios.id=comentarios.usuario_id WHERE tweet_id = ? ORDER BY comentarios.fecha DESC LIMIT 100 ', [tweetId]);
         return rows;
     }
 }

@@ -24,6 +24,7 @@ export class comentariosController {
 
   static async getByTweetId(req, res) {
     try {
+      
       const comentarios = await comentariosModel.getByTweetId(req.params.tweetId);
       if (!comentarios) {
         return res.status(404).json({ error: 'Comentarios no encontrados' });

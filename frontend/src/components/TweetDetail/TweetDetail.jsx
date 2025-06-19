@@ -4,7 +4,16 @@ import "./TweetDetail.css"; // Asegúrate de tener estilos para tweet-detail
 export function TweetDetail({ tweet, onBack, socket, currentUser }) {
   const [comments, setComments] = useState([]);
 
-  const { createcomentario} = useComentarios();
+  const { createcomentario,getComentariosByTweeid} = useComentarios();
+  useEffect(() => {
+    async function fetchComments() {
+    const a = await getComentariosByTweeid(tweet.id);
+    console.log("Comentarios obtenidos:", a);
+    setComments(a || []);
+  }
+  fetchComments();
+}, [tweet.id]);
+  
   useEffect(() => {
     setComments([]);
 console.log("Cargando comentarios para el tweet:", tweet);
@@ -40,15 +49,15 @@ console.log("Cargando comentarios para el tweet:", tweet);
   const [commentText, setCommentText] = useState("");
 
   const handleSendComment = () => {
-    const text = commentText.trim();
-    if (!text) return;
+    const texto = commentText.trim();
+    if (!texto) return;
 
     const newComment = {
       id: Date.now(),
-      user: currentUser?.nombre || "Anon",
-      text,
+      nombre: currentUser?.nombre || "Anon",
+      texto,
     };
-     createcomentario({ userId: currentUser?.id, text: newComment.text, tweetId: tweet.id })
+     createcomentario({ userId: currentUser?.id, text: newComment.texto, tweetId: tweet.id })
      tweet.total_comentarios = (tweet.total_comentarios || 0) + 1;
     socket.emit("addComment", { tweetId: tweet.id, comment: newComment });
     setCommentText("");
@@ -80,7 +89,7 @@ console.log("Cargando comentarios para el tweet:", tweet);
         {comments.length > 0 ? (
           comments.map((comment) => (
             <div key={comment?.id } className="comment">
-              <b>{comment?.user ?? "Anon"}:</b> {comment?.text ?? ""}
+              <b>{comment?.nombre ?? "Anon"}:</b> {comment?.texto ?? ""}
             </div>
           ))
         ) : (
