@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import{ useComentarios } from "@/hooks/useComentarios";
+import "./TweetDetail.css"; // Asegúrate de tener estilos para tweet-detail
 export function TweetDetail({ tweet, onBack, socket, currentUser }) {
   const [comments, setComments] = useState([]);
 
@@ -54,6 +55,7 @@ console.log("Cargando comentarios para el tweet:", tweet);
   };
 
   return (
+     <div className="tweet-detail-wrapper">
     <div className="tweet-detail">
       <button onClick={onBack} style={{ marginBottom: "1rem" }}>
         ← Volver
@@ -96,6 +98,7 @@ console.log("Cargando comentarios para el tweet:", tweet);
           Comentar
         </button>
       </div>
+    </div>
     </div>
   );
 }

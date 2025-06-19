@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { useAuth } from "@/hooks/useAuth";
 import { TweetDetail } from "@/components/TweetDetail/TweetDetail";
 import {useTweets} from "@/hooks/useTweets"; 
-
+ // Asegúrate de que este archivo exista
 
 const socket = io("http://localhost:4000");
 
@@ -86,6 +86,9 @@ export function Chatg() {
   }
 
   return (
+    <>
+    
+    <div className="chatg-container">
     <div className="feed">
       <div className="new-tweet-form" style={{ marginBottom: "1rem" }}>
         <textarea
@@ -102,26 +105,27 @@ export function Chatg() {
 
       {tweets.map((tweet) => (
         <div
-          key={tweet.id}
-          className="tweet"
-          style={{ cursor: "pointer" }}
-          onClick={() => setSelectedTweet(tweet)}
-        >
-          <div className="header">
-            <span className="username">{tweet.username}</span>
-            {tweet.handle && <span className="handle">-{tweet.handle}</span>}
-          </div>
+  key={tweet.id}
+  className="tweet"
+  onClick={() => setSelectedTweet(tweet)}
+>
+  <div className="tweet-header">
+    <span className="username">{tweet.username}</span>
+    {tweet.handle && <span className="handle"> @{tweet.handle}</span>}
+  </div>
 
-          {tweet.text && <div className="text">{tweet.text}</div>}
+  <div className="tweet-text">{tweet.text}</div>
 
-          <div className="icons">
-            <span>💬 { tweet.total_comentarios}</span> {/* Comentarios no gestionados aquí */}
-            <span>🔁 {tweet.retweets || 0}</span>
-            <span>❤️ {tweet.likes || 0}</span>
-            <span>👁 {tweet.views || 0}</span>
-          </div>
-        </div>
+  <div className="tweet-icons">
+    <span>💬 {tweet.total_comentarios}</span>
+    <span>🔁 {tweet.retweets}</span>
+    <span>❤️ {tweet.likes}</span>
+    <span>👁 {tweet.views}</span>
+  </div>
+</div>
       ))}
     </div>
+    </div>
+    </>
   );
 }

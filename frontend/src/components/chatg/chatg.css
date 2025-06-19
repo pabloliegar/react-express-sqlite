@@ -1,21 +1,115 @@
-.comments {
-  margin-top: 10px;
-  background-color: #262626;
+.chatg-container {
+  margin-left: 700px;
+  margin-top: 130px;
+   display: flex;
+  justify-content: center; /* centra HORIZONTALMENTE */
+  padding-top: 2rem;        /* espacio arriba */
+  background-color: #000;
+  min-height: 100vh;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.feed {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;   
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background-color: #000;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+.new-tweet-form {
+  background-color: #16181c;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid #2f3336;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  background-color: #000;
+  color: white;
+  border: 1px solid #2f3336;
   border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+  width: 100%;
   padding: 10px;
+  box-sizing: border-box;
 }
 
-.comment {
-  padding: 6px 0;
-  border-bottom: 1px solid #444;
-}
-
-.comment:last-child {
-  border-bottom: none;
-}
-
-.comment-user {
-  color: #00acee;
+button {
+  background-color: #1d9bf0;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 9999px;
   font-weight: bold;
-  margin-right: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-end; /* botón alineado a la derecha dentro del flex container */
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #1a8cd8;
+}
+
+.tweet {
+  background-color: #16181c;
+  border-bottom: 1px solid #2f3336;
+  padding: 1rem;
+  transition: background-color 0.2s;
+}
+
+.tweet:hover {
+  background-color: #1c1e22;
+}
+
+.tweet-header {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.username {
+  color: white;
+}
+
+.handle {
+  color: #71767b;
+  font-size: 14px;
+}
+
+.tweet-text {
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.tweet-icons {
+  display: flex;
+  justify-content: space-around;
+  color: #71767b;
+  font-size: 14px;
+}
+
+.tweet-icons span {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.tweet-icons span:hover {
+  color: #1d9bf0;
 }

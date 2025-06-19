@@ -1,0 +1,118 @@
+/* En el archivo TweetDetail.css */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+   /* Opcional, para fondo negro general */
+}
+
+.tweet-detail-wrapper {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  height: 100vh;           /* Altura total de la ventana */
+  width: 100vw;            /* Ancho total */
+  box-sizing: border-box;
+  padding: 1rem;           /* Para que no quede pegado a los bordes */
+    /* fondo negro */
+}
+
+.tweet-detail {
+  max-width: 600px;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: #000;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #2f3336;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow-y: auto; /* si contenido es más alto que pantalla, scroll */
+  max-height: 90vh; /* evitar que sobrepase la pantalla */
+}
+
+
+.tweet-detail button {
+  background-color: #1d9bf0;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.tweet-detail button:hover {
+  background-color: #1a8cd8;
+}
+
+.tweet {
+  background-color: #16181c;
+  border: 1px solid #2f3336;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.username {
+  color: white;
+}
+
+.handle {
+  color: #71767b;
+  font-size: 14px;
+}
+
+.text {
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+  color: #71767b;
+  font-size: 14px;
+}
+
+.icons span:hover {
+  color: #1d9bf0;
+  cursor: pointer;
+}
+
+.comments-section {
+  background-color: #16181c;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #2f3336;
+  margin-top: 1rem;
+}
+
+.comment {
+  border-top: 1px solid #2f3336;
+  padding: 0.5rem 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+textarea {
+  background-color: #000;
+  color: white;
+  border: 1px solid #2f3336;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
