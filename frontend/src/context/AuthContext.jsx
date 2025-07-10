@@ -31,7 +31,7 @@ export function AuthProvider(props){
        // eslint-disable-next-line
     }, []);
     useEffect(() => {
-  console.log('Auth actualizado:', auth);
+  
 }, [auth]);
     const login = async (token) => {
         setToken(token)
