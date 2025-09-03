@@ -5,6 +5,7 @@
   min-height: 100vh;
   background-color: #000;
  
+ 
 }
 
 .sidebar {
@@ -12,12 +13,14 @@
   padding: 1rem;
   border-right: 1px solid #333;
   box-sizing: border-box;
+  
 }
 
 .nav {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+   position: fixed;
 }
 
 .nav-link {
