@@ -1,0 +1,9 @@
+{
+  "appId": "com.ipc.ipc",
+  "appName": " ipc",
+  "webDir": "dist",
+  "server": {
+  "url": "http://192.168.68.51:5173",
+  "cleartext": true
+}
+}

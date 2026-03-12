@@ -2,7 +2,7 @@
 
 import { Home, User } from 'lucide-react';
 import { Link, Outlet } from 'react-router-dom';
-import './SidebarLayout.css'; // Asegúrate de crear e importar este archivo
+import './SidebarLayout.css'; 
 
 export function SidebarLayout () {
   return (

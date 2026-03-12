@@ -1,5 +1,7 @@
+import { API_URL } from './../config.js';
 export async function getTweetsApi() {
-    const response = await fetch('/api/tweets', {
+     
+    const response = await fetch(`${API_URL}/api/tweets`, {
         method: 'GET',
         headers: {
         'Content-Type': 'application/json',
@@ -14,7 +16,8 @@ export async function getTweetsApi() {
     return await response.json();
     }
     export async function createTweetApi( { userId, text }) {  
-        const response = await fetch('/api/tweets', {
+         
+        const response = await fetch(`${API_URL}/api/tweets`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

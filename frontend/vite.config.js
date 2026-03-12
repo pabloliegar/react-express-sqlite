@@ -12,7 +12,11 @@ export default defineConfig({
       // agrega más alias si lo necesitas
     }
   },
+   base: './',
   server: {
+    host: true, // <--- escucha en todas las interfaces de red
+    port: 5173,
+    strictPort: true,
     proxy: {
       '/api': 'http://127.0.0.1:4000', // redirige /api a tu backend
       

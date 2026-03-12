@@ -4,9 +4,10 @@ import { io } from "socket.io-client";
 import { useAuth } from "@/hooks/useAuth";
 import { TweetDetail } from "@/components/TweetDetail/TweetDetail";
 import {useTweets} from "@/hooks/useTweets"; 
+import { API_URL } from '@/config.js';
  // Asegúrate de que este archivo exista
 
-const socket = io("http://localhost:4000");
+const socket = io(`${API_URL}`);
 
 export function Chatg() {
   const { getTweets, createTweet } = useTweets();

@@ -4,7 +4,13 @@ import { Server } from "socket.io";
 export default function(server) {
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+     origin: [
+    "http://localhost:5173",   // web dev
+    "http://192.168.68.51:5173", // web desde red local
+    "capacitor://localhost",   // móvil Capacitor
+    "http://10.0.2.2:4000",    // Android emulator
+    "http://localhost:4000"    // iOS emulator / web
+  ],
       methods: ["GET", "POST"],
       credentials: true,
     },

@@ -9,7 +9,11 @@ const server = http.createServer(app)
 // Importar rutas
 
 app.use(cors({
-  origin: 'http://localhost:5173', // Solo permite peticiones desde el frontend
+  origin:[  'http://localhost:5173',       // desarrollo Vite
+    'http://192.168.68.51:5173',   // desarrollo desde móvil
+    'capacitor://localhost',
+    'http://10.0.2.2:4000'
+  ], // Solo permite peticiones desde el frontend
   credentials: true
 }));
 

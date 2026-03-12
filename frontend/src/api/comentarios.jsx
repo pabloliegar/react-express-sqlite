@@ -1,6 +1,8 @@
-
+import { API_URL } from './../config.js';
     export async function getComentarios() {
-        const response = await fetch('/api/comentarios', {
+       // VITE_API_URL=http://192.168.68.51:4000;
+         
+        const response = await fetch(`${API_URL}/api/comentarios`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -15,7 +17,8 @@
     }
 
     export async function createComentario({ userId, text, tweetId }) {
-        const response = await fetch('/api/comentarios', {
+         
+        const response = await fetch(`${API_URL}/api/comentarios`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +34,8 @@
     }
 
     export async function getComentariosByTweetId(tweetId) {
-        const response = await fetch(`/api/comentarios/${tweetId}`, {
+        
+        const response = await fetch(`${API_URL}/api/comentarios/${tweetId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
