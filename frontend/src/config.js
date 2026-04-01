@@ -5,6 +5,6 @@ export const API_URL = (() => {
   if (ua.includes('Android Emulator')) return 'http://10.0.2.2:4000';
   // Web
   if (window.location.hostname === 'localhost') return 'http://127.0.0.1:4000';
-  // Móvil físico en la misma WiFi
+  
   return 'http://10.0.2.2:4000';
 })();
