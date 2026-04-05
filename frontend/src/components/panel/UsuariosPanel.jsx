@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { socket } from "@/socket";
 import "./panel.css";
 import { useAuth } from "@/hooks/useAuth";
+
 export default function UsuariosPanel() {
   const { auth } = useAuth();
   const [usuarios, setUsuarios] = useState([]);
-  const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    socket.emit("login", auth?.me?.[0]?.id); // 👈 ID real del usuario
-  }, []);
+    socket.emit("login", auth?.me?.[0]?.id);
+  }, [auth]);
+
   useEffect(() => {
     socket.on("usuarios", (data) => {
       setUsuarios(data);
@@ -18,25 +20,21 @@ export default function UsuariosPanel() {
   }, []);
 
   return (
-    <>
-      {/* Botón hamburguesa */}
-      <button className="menu-btn" onClick={() => setOpen(!open)}>
-        ☰
-      </button>
+    <div className="usuarios-content">
+      <h3>Usuarios</h3>
 
-      {/* Sidebar */}
-       <div className={`usuarios-sidebar ${open ? "open" : ""}`}>
-        <h3>Usuarios</h3>
+      {usuarios.length === 0 && (
+        <p style={{ color: "#aaa" }}>No hay usuarios</p>
+      )}
 
-        {usuarios.map((user) => (
-          <div key={user.id} className="user">
-            <span>{user.nombre}</span>
-            <span className={user.conectado ? "online" : "offline"}>
-              {user.conectado ? "🟢" : "🔴"}
-            </span>
-          </div>
-        ))}
-      </div>
-    </>
+      {usuarios.map((user) => (
+        <div key={user.id} className="user">
+          <span>{user.nombre}</span>
+          <span className={user.conectado ? "online" : "offline"}>
+            {user.conectado ? "🟢" : "🔴"}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }

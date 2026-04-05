@@ -36,7 +36,7 @@ export default async function initWebSocket(server) {
       usuariosConectados[userId] = socket.id;
 
       await db.query(
-        "UPDATE usuarios SET conectado = 1 WHERE id = ?",
+        "UPDATE usuarios SET conectado = 1 WHERE id = ? order by conectado=1 desc",
         [userId]
       );
 
@@ -90,7 +90,7 @@ export default async function initWebSocket(server) {
   // =========================
   async function emitirUsuarios() {
     try {
-      const [rows] = await db.query("SELECT * FROM usuarios");
+      const [rows] = await db.query("SELECT * FROM usuarios order by conectado=1 desc");
       io.emit("usuarios", rows);
     } catch (err) {
       console.error(err);

@@ -1,50 +1,18 @@
-
-.layout {
-  display: flex;
-  min-height: 100vh;
-  background-color: #000;
-  overflow-x: hidden; /* 👈 clave */
-}
-
-.menu-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 3000; /* 👈 por encima de todo */
-}
-
-.usuarios-sidebar {
-  position: fixed;
-  top: 0;
-    right: -10000px;
-  transition: 0.3s;
-
-  width: 260px;
-  height: 100%;
-  background: #1e1e2f;
+.usuarios-content {
   color: white;
-  padding: 20px;
-  transition: right 0.3s ease;
-  z-index: 2000; /* 👈 más alto */
-  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-}
-
-.usuarios-sidebar.open {
-  right: 0;
 }
 
 .user {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #222;
 }
 
 .online {
-  color: green;
+  color: #0f0;
 }
 
 .offline {
-  color: red;
+  color: #f00;
 }
