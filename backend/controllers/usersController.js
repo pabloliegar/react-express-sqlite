@@ -1,7 +1,7 @@
 import { usersModel } from '../models/usersModel.js'
 import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = 'tu_clave_secreta_aqui';
+
 export class usersController{
     static async getAll(req,res){
       try {
@@ -44,5 +44,13 @@ export class usersController{
       
     }
   }
-
+static async delete(req, res) {
+    try {
+      const { id } = req.body; // Aquí asumimos que el token se envía en el cuerpo de la solicitud
+      const result = await usersModel.delete(id);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }

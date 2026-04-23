@@ -52,5 +52,9 @@ export class usersModel{
   return token;
    
   }
-
+static async delete(id){
+    const decoded = jwt.verify(id, SECRET_KEY);
+  await connection.execute('DELETE FROM usuarios WHERE id = ?', [decoded.id]);
+  return { message: 'Usuario eliminado' };
+}
 }

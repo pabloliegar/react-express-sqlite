@@ -33,4 +33,15 @@ export async function getMeApi(token) {
   });
   return await response.json();
 }
+export async function deleteUserApi(token) {
+  const response = await fetch(`${API_URL}/api/usuarios/delete`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ id: token }) // Enviamos el token en el cuerpo de la solicitud
+  });
+  return await response.json();
+}
 

@@ -1,4 +1,4 @@
-import {createUser,getMeApi} from "../api/users"
+import {createUser,getMeApi,deleteUserApi} from "../api/users"
 
 export function useUser(){
     const getMe=async(token)=>{
@@ -10,8 +10,13 @@ export function useUser(){
         const response= await createUser(data)
         return response
     }
+    const deleteUser=async(token)=>{
+        const response= await deleteUserApi(token)
+        return response
+    }
     return {
         getMe,
-        userCreate
+        userCreate,
+        deleteUser
     }
 }

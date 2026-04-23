@@ -1,0 +1,111 @@
+/* Fondo general */
+.profile-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black; /* 🔥 negro elegante */
+  padding: 16px;
+}
+
+/* Tarjeta */
+.profile-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Título */
+.profile-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Cada campo */
+.profile-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f5f7ff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.profile-item span {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
+
+.profile-item p {
+  margin: 4px 0 0;
+  font-weight: 500;
+  color: #222;
+  word-break: break-word;
+}
+
+/* Hover bonito */
+.profile-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 18px;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 18px;
+  }
+
+  .profile-title {
+    font-size: 20px;
+  }
+
+  .profile-item p {
+    font-size: 14px;
+  }
+}
+/* Botón eliminar */
+.delete-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d4f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #d9363e;
+  transform: translateY(-1px);
+}
+
+.delete-btn:active {
+  transform: scale(0.98);
+}
