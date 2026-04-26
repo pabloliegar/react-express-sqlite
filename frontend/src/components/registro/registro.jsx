@@ -18,7 +18,8 @@ export function Registro(){
     try {
       const newUser = await userCreate(form);
       console.log('Usuario creado:', newUser);
-      navigation('/login');
+      
+      window.location.href = "/login";
     } catch (err) {
       console.error('Error:', err.message);
     }
