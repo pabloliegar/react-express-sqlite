@@ -91,6 +91,10 @@ export function Chatg() {
     
     <div className="chatg-container">
     <div className="feed">
+      <label className="user-connected">
+  Estas conectado con:
+  <span>{auth?.me?.[0].nombre}</span>
+</label>
       <div className="new-tweet-form" style={{ marginBottom: "1rem" }}>
         <textarea
           rows={3}

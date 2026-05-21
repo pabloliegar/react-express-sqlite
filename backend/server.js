@@ -1,6 +1,7 @@
 import express from 'express'
 import http from 'http'
 import cors from 'cors';
+import {ip} from '../frontend/src/ip.js'
 import { usersRouter,tweetsRouter,comentariosRouter } from './routes/routes.js'
 import WebSocketServer from './websocket.js' // asegúrate de que este archivo también use export default
 const app = express()
@@ -10,9 +11,13 @@ const server = http.createServer(app)
 
 app.use(cors({
   origin:[  'http://localhost:5173',       // desarrollo Vite
-    'http://192.168.68.51:5173',   // desarrollo desde móvil
+    'http://192.168.68.59:5173',   // desarrollo desde móvil
     'capacitor://localhost',
-    'http://10.0.2.2:4000'
+    'http://10.0.2.2:4000',
+    'http://localhost:4000',
+    'http://192.168.68.59:4000',
+    `http://${ip}:4000`,
+    `http://${ip}:5173`
   ], // Solo permite peticiones desde el frontend
   credentials: true
 }));

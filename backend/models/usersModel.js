@@ -27,6 +27,7 @@ export class usersModel{
       const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
       const sql = 'INSERT INTO USUARIOS (nombre, email, contrasena, avatar) VALUES (?, ?, ?, ?)';
       const [result] = await connection.execute(sql, [nombre, email, hashedPassword, avatar]);
+      console.log("creado")
       return { id: result.insertId, nombre, email, avatar };
   }
   static async usuario(email,contraseña){

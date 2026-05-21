@@ -1,3 +1,4 @@
 import { io } from "socket.io-client";
-
-export const socket = io("http://localhost:4000");
+import {ip} from "../src/ip"
+export const socket = io(`http://${ip}:4000`);
+   

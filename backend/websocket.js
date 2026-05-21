@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import mysql from "mysql2/promise";
-
+import {ip} from '../frontend/src/ip.js' // Asegúrate de que este archivo exista y exporte lo necesario
 export default async function initWebSocket(server) {
 
   const db = await mysql.createPool({
@@ -14,10 +14,14 @@ export default async function initWebSocket(server) {
     cors: {
       origin: [
         "http://localhost:5173",
-        "http://192.168.68.51:5173",
+        "http://192.168.68.59:5173",
         "capacitor://localhost",
         "http://10.0.2.2:4000",
-        "http://localhost:4000"
+        "http://localhost:4000",
+        
+        'http://192.168.68.59:4000',
+        `http://${ip}:4000`,
+        `http://${ip}:5173`
       ],
       methods: ["GET", "POST"],
       credentials: true,
