@@ -81,7 +81,9 @@
 
 /* 📱 MOBILE */
 @media (max-width: 768px) {
-
+  .nav{
+  margin-top: 60px;
+  }
   .menu-btn {
     display: block;
   }

@@ -18,10 +18,11 @@ export function Registro(){
     try {
       const newUser = await userCreate(form);
       console.log('Usuario creado:', newUser);
-      
+      window.confirm('Usuario creado exitosamente');
       window.location.href = "/login";
     } catch (err) {
       console.error('Error:', err.message);
+      window.alert('Error al crear el usuario intente nuevamente con un correo diferente o usuario diferente');
     }
   };
     return(
