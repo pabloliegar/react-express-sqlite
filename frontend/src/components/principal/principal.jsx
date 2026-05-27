@@ -7,7 +7,7 @@ import {Chatg} from "@/components/chatg/chatg";
 import { useAuth } from "@/hooks/useAuth";
 export function Principal() {
    const [showLoginModal, setShowLoginModal] = useState(false);
-      const { auth } = useAuth();
+     
   useEffect(() => {
     const token = getToken();
     if (!token) {
